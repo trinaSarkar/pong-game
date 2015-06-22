@@ -1,17 +1,14 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
-public class Ball : MonoBehaviour {
-
-	public float speed; 
-	public GameObject hazard2; 
+public class BirdController : MonoBehaviour {
 
 	private Rigidbody rb; 
 	private GameController gameController; 
- 
 
-	void Start() {
+	public int speed; 
 
+	void Start () {
 		GameObject gameControllerObject = GameObject.FindWithTag ("Game Controller");
 		if (gameControllerObject != null) {
 			gameController = gameControllerObject.GetComponent <GameController> ();
@@ -21,23 +18,23 @@ public class Ball : MonoBehaviour {
 		} 
 
 		rb = GetComponent<Rigidbody> ();
-		rb.velocity = transform.forward * speed;
+		Vector3 movement = new Vector3 (1.0f, 0.0f, 0.0f); 
+		rb.velocity = movement * speed; 
 	}
 	
 	void OnCollisionEnter(Collision other) {
-		if (other.collider.tag == "Bottom Wall") {
+		if (other.collider.tag == "Ball") {
+			Destroy (other.collider.gameObject);
 			Destroy (gameObject); 
 			gameController.UpdateGameStatus(); 
-		}
-		if (other.collider.tag == "Hazard") {
-			AudioSource audio = GetComponent<AudioSource>();
-			audio.Play ();
-			gameController.AddScore ();
+		} else if (other.collider.tag == "Hazard") {
+			gameController.SubtractScore (); 
+			Destroy (gameObject);
 			Destroy (other.collider.gameObject); 
-			Instantiate (hazard2, other.gameObject.transform.position, hazard2.transform.rotation);
-		}
-		if (other.collider.tag == "Cube") {
+		} else if (other.collider.tag == "Right Wall") {
+			Destroy (gameObject);
+		} else if (other.collider.tag == "Board") {
 			return;
 		}
-	}
+	} 
 }

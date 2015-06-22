@@ -69,6 +69,7 @@
 -define:UNITY_EDITOR_64
 -define:UNITY_EDITOR_OSX
 'Assets/Scripts/Ball.cs'
+'Assets/Scripts/BirdController.cs'
 'Assets/Scripts/CloudController.cs'
 'Assets/Scripts/GameController.cs'
 'Assets/Scripts/Mover.cs'

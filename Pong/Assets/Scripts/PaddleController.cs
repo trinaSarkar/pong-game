@@ -5,6 +5,9 @@ public class PaddleController : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision) {
 
-		Destroy (gameObject); 
+		if (collision.collider.tag == "Ball") {
+			AudioSource audio = GetComponent<AudioSource> ();
+			audio.Play ();
+		}
 	}
 }

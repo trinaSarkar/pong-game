@@ -15,10 +15,8 @@ public class CloudController : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision other) {
-		if (other.collider.tag == "Top Wall") {
-			Destroy (gameObject);
-		} else {
-			return;
+		if (other.collider.tag != "Board") {
+			Destroy (gameObject); 
 		}
 	}
 }

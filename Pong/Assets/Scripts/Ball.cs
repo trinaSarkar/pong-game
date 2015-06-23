@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class Ball : MonoBehaviour {
-
+	 
 	public float speed; 
 	public GameObject hazard2; 
 
@@ -11,7 +11,6 @@ public class Ball : MonoBehaviour {
  
 
 	void Start() {
-
 		GameObject gameControllerObject = GameObject.FindWithTag ("Game Controller");
 		if (gameControllerObject != null) {
 			gameController = gameControllerObject.GetComponent <GameController> ();
@@ -23,7 +22,7 @@ public class Ball : MonoBehaviour {
 		rb = GetComponent<Rigidbody> ();
 		rb.velocity = transform.forward * speed;
 	}
-	
+
 	void OnCollisionEnter(Collision other) {
 		if (other.collider.tag == "Bottom Wall") {
 			Destroy (gameObject); 
@@ -38,6 +37,6 @@ public class Ball : MonoBehaviour {
 		}
 		if (other.collider.tag == "Cube") {
 			return;
-		}
+		} 
 	}
 }

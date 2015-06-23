@@ -20,6 +20,7 @@ public class GameController : MonoBehaviour {
 	public int waveWait; 
 	public GameObject hazard; 
 	public GameObject hazard2;
+	public GameObject ball; 
 
 	void Start () {
 		score = 0;
@@ -28,7 +29,8 @@ public class GameController : MonoBehaviour {
 		gameOverText.text = ""; 
 		restartText.text = ""; 
 		UpdateScore (); 
-		welcomeText.text = "WELCOME TO KADHO PONG!";  
+		welcomeText.text = "WELCOME TO KADHO PONG!"; 
+		Instantiate (ball, ball.transform.position, ball.transform.rotation); 
 		StartCoroutine (SpawnWaves ());
 		StartCoroutine (BirdWaves ());
 	}
@@ -61,7 +63,6 @@ public class GameController : MonoBehaviour {
 			                                       0.0f,	
 			                                      Random.Range (-2.0f, 4.0f)); 
 			Instantiate (hazard2, hazard2Position, hazard2.transform.rotation); 
-			Rigidbody rb2 = hazard2.GetComponent<Rigidbody> ();
 			yield return new WaitForSeconds (hazardWait); 
 		}
 		yield return new WaitForSeconds (waveWait); 

@@ -6,7 +6,9 @@ public class BirdController : MonoBehaviour {
 	private Rigidbody rb; 
 	private GameController gameController; 
 
-	public int speed; 
+	public int speed;
+	public int secondBallWait; 
+	public GameObject ball; 
 
 	void Start () {
 		GameObject gameControllerObject = GameObject.FindWithTag ("Game Controller");
@@ -23,18 +25,15 @@ public class BirdController : MonoBehaviour {
 	}
 	
 	void OnCollisionEnter(Collision other) {
-		if (other.collider.tag == "Ball") {
-			Destroy (other.collider.gameObject);
-			Destroy (gameObject); 
-			gameController.UpdateGameStatus(); 
-		} else if (other.collider.tag == "Hazard") {
-			gameController.SubtractScore (); 
+		if (other.collider.tag == "Hazard") {
 			Destroy (gameObject);
 			Destroy (other.collider.gameObject); 
 		} else if (other.collider.tag == "Right Wall") {
 			Destroy (gameObject);
 		} else if (other.collider.tag == "Board") {
 			return;
+		} else if (other.collider.tag == "Ball") {
+			gameController.SubtractScore ();
 		}
 	} 
 }
